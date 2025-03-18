@@ -76,8 +76,9 @@ namespace SP2025_Assignment3_2._0_MMcConnell.Controllers
             {
                 // Add movie to the database
                 _context.Add(movie);
+                Console.WriteLine(movie);
                 await _context.SaveChangesAsync();
-
+                Console.WriteLine(_context);
                 // Redirect to the Index page after successful creation
                 return RedirectToAction(nameof(Index));
             }
