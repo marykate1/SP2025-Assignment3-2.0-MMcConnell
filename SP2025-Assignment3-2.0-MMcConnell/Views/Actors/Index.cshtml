@@ -68,9 +68,16 @@
             <td>
                 @Html.DisplayFor(modelItem => item.IMDBLink)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PhotoUrl)
-            </td>
+                <td>
+                    @if (!string.IsNullOrEmpty(item.PhotoPath))
+                    {
+                        <img src="@item.PhotoPath" alt="Actor Photo" width="50" height="50" style="border-radius: 5px;" />
+                    }
+                    else
+                    {
+                        <span>No photo available</span>
+                    }
+                </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |

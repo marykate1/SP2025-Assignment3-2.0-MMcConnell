@@ -52,18 +52,45 @@ namespace SP2025_Assignment3_2._0_MMcConnell.Controllers
         // POST: Actors/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Create([Bind("Id,Name,Gender,Age,IMDBLink,PhotoUrl")] Actor actor)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        _context.Add(actor);
+        //        await _context.SaveChangesAsync();
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    return View(actor);
+        //}
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Gender,Age,IMDBLink,PhotoUrl")] Actor actor)
+        public async Task<IActionResult> Create(Actor actor)
         {
             if (ModelState.IsValid)
             {
+                if (actor.ActorPhoto != null)
+                {
+                    var fileName = Path.GetFileName(actor.ActorPhoto.FileName);
+                    var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/actors", fileName);
+
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await actor.ActorPhoto.CopyToAsync(stream);
+                    }
+
+                    // Optionally save the file name or path to the database
+                    actor.PhotoPath = "/images/actors/" + fileName;
+                }
+
                 _context.Add(actor);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(actor);
         }
+
 
         // GET: Actors/Edit/5
         public async Task<IActionResult> Edit(int? id)

@@ -51,30 +51,12 @@ namespace SP2025_Assignment3_2._0_MMcConnell.Controllers
         }
 
         // POST: Movies/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Create([Bind("Id,Title,IMDBLink,Genre,Year,PosterUrl")] Movie movie)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        _context.Add(movie);
-        //        await _context.SaveChangesAsync();
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    return View(movie);
-        //}
-        // POST: Movies/Create
-        // MoviesController.cs
-
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Movie movie)
+        public async Task<IActionResult> Create([Bind("Id,Title,IMDBLink,Genre,Year,PosterUrl")] Movie movie)
         {
             if (ModelState.IsValid)
             {
-                // Add movie to the database
                 _context.Add(movie);
                 Console.WriteLine(movie);
                 await _context.SaveChangesAsync();
@@ -82,10 +64,8 @@ namespace SP2025_Assignment3_2._0_MMcConnell.Controllers
                 // Redirect to the Index page after successful creation
                 return RedirectToAction(nameof(Index));
             }
-
             return View(movie);
         }
-
 
         // GET: Movies/Edit/5
         public async Task<IActionResult> Edit(int? id)
