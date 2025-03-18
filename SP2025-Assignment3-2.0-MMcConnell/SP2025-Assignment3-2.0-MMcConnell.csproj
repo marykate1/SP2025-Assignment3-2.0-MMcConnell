@@ -8,7 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\test\" />
+    <Compile Remove="Controllers\test\**" />
+    <Content Remove="Controllers\test\**" />
+    <EmbeddedResource Remove="Controllers\test\**" />
+    <None Remove="Controllers\test\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
