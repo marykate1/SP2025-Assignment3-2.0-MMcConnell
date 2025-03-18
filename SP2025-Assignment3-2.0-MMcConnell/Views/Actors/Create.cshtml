@@ -26,50 +26,44 @@
     </div>
 </nav>
 
-
-<h1>Create</h1>
-
-<h4>Actor</h4>
+<h2>Create Actor</h2>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Gender" class="control-label"></label>
-                <input asp-for="Gender" class="form-control" />
-                <span asp-validation-for="Gender" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Age" class="control-label"></label>
-                <input asp-for="Age" class="form-control" />
-                <span asp-validation-for="Age" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IMDBLink" class="control-label"></label>
-                <input asp-for="IMDBLink" class="form-control" />
-                <span asp-validation-for="IMDBLink" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PhotoUrl" class="control-label"></label>
-                <input asp-for="PhotoUrl" class="form-control" />
-                <span asp-validation-for="PhotoUrl" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+<form asp-action="Create" method="post">
+    <p4>Name</p4>
+    <div class="form-group">
+        <label asp-for="Name" class="control-label"></label>
+        <input asp-for="Name" class="form-control" />
     </div>
-</div>
+    <p4>Gender</p4>
+        <div class="form-group">
+        <label asp-for="Gender" class="control-label"></label>
+        <select asp-for="Gender" class="form-control">
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+        </select>
+    </div>
+    <p4>Age</p4>
+    <div class="form-group">
+        <label asp-for="Age" class="control-label"></label>
+        <input asp-for="Age" type="number" class="form-control" />
+    </div>
+    <p4>IMDBLink</p4>
+    <div class="form-group">
+        <label asp-for="IMDBLink" class="control-label"></label>
+        <input asp-for="IMDBLink" class="form-control" />
+    </div>
+    <p4>Photo Url</p4>
+    <div class="form-group">
+        <label asp-for="PhotoUrl" class="control-label"></label>
+        <input asp-for="PhotoUrl" class="form-control" />
+    </div>
+    <div class="form-group mt-3">
+        <input type="submit" value="Create" class="btn btn-primary" />
+    </div>
+    <a href="@Url.Action("Index", "Actors")">Back to Actors List</a>
+</form>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
